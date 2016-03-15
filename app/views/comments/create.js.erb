@@ -1,0 +1,15 @@
+<% publish_to @reciever_path do %>
+  $.notify("<%=@author.username%> commented in your post", "info");
+  var id = "<%=@post.id%>";
+  $("#comments_"+id).load(location.href + " #comments_"+id);
+<% end %>
+
+
+
+var id = "<%=@post.id%>";
+
+
+$("#comments_"+id).load(location.href + " #comments_"+id);
+$('#comment_comment').closest('form').find("input[type=text], textarea").val("");
+
+

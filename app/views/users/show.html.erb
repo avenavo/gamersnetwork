@@ -1,0 +1,139 @@
+<% @header = @user.username %>
+
+
+<div class="col-md-8 centered" , style="margin-top:7%;margin-bottom:5%;">
+            <div class="col-sm-12">
+                <div class="col-xs-12 col-sm-8">
+                   <p>
+                     <strong>Status: </strong> 
+                     <% if @user.last_activity_at > 2.minutes.ago %>
+                       <span class="online">ONLINE</span>
+                     <%else%>
+                       <span class="offline">OFFLINE</span>
+                     <%end%>
+                   </p>
+                    <p>
+                     <strong>Last seen: </strong> 
+                       <%=time_ago_in_words(@user.last_activity_at) %> ago
+                   </p>
+                   <% if @user != current_user %>
+                   <p>
+                     <ul class="list-inline list-unstyled">
+                       <li><strong>Contact: </strong></li>
+                       <li><%= link_to 'private msg', conversations_path(id:@user.id), :class => 'btn btn-primary btn-block', method: :post %></li>
+                       <li><%= mail_to  @user.email, 'email' , :class => 'btn btn-primary btn-block' %></li>
+                     </ul>
+                   </p>
+                   <%end%>
+                </div>     
+            <%= image_tag(@user.asset.url(:medium), class: 'img-circle img-medium border') %>
+            </div>            
+            <div class="col-xs-12 divider text-center">
+                <div class="col-xs-12 col-sm-4 emphasis">
+                    <h2><strong><%= @user.games.count %></strong></h2>                    
+                    <p><small>Games</small></p>
+                    <%= link_to raw("<span class=\"fa fa-gamepad\"></span> User Games "), 
+                      user_games_path(user_id:@user.id),
+                      method: :get,
+                      class: 'btn btn-primary btn-block' %>
+                </div>
+                <div class="col-xs-12 col-sm-4 emphasis">
+                    <h2><strong><%= @user.posts.count%></strong></h2>                    
+                    <p><small>Posts</small></p>
+
+                    <%= link_to raw("<span class=\"fa fa-user\"></span> View Posts "), 
+                      posts_path(user_id:@user.id),
+                      method: :get,
+                      class: 'btn btn-info btn-block' %>
+                </div>
+                <div class="col-xs-12 col-sm-4 emphasis">
+                    <h2><strong><%= @user.friends.count %></strong></h2>                    
+                    <p><small>Friends</small></p>
+                    <div class='friendship_button'>
+                     <% if current_user.pending_friends.where(id: @user.id).present? %>
+                       <%= link_to raw("<span class=\"fa fa-minus\"></span> Delete Request "), 
+                         friend_request_reject_friendship_path(id:@user.id), 
+                         class: "btn btn-warning btn-block",
+                         method: :delete,
+                         remote: :true %>
+                     <% elsif current_user.requested_friendships.where(id: @user.id).present? %>  
+                       <%= link_to raw("<span class=\"fa fa-plus-circle\"></span> Accept Friendship "), 
+                        friend_request_accept_friendship_path(id:@user.id), 
+                        class: "btn btn-success btn-block",
+                        method: :post,
+                        remote: :true %>
+                     <% elsif current_user.friends.where(id: @user.id).present? %>  
+                        <%= link_to raw("<span class=\"fa fa-minus\"></span> Remove from Friends "), 
+                         friend_request_reject_friendship_path(id:@user.id), 
+                         class: "btn btn-danger btn-block",
+                         method: :delete,
+                         remote: :true %>
+                     <% elsif current_user != @user %>  
+                       <%= link_to raw("<span class=\"fa fa-plus\"></span> Add to Friends "), 
+                        friend_request_friendship_path(id:@user.id), remote: :true, 
+                        class: "btn btn-success btn-block",
+                        method: :post,
+                        remote: :true %>
+                    <% end %>
+                    </div>
+                </div>
+            </div>     
+  </div>
+
+
+
+<table class='table'>
+
+<%games=@user.games%>
+<% games.each_with_index do |game,index| %>
+ <%index+=1%>
+  <tr>
+  <td>
+  <div class="col-md-8 centered" , style="margin-top:1%;">
+    <div class="thumbnail">
+      <div class="secrow">
+        <center><%= link_to image_tag(game.banner.url, class: 'img-responsive border'), game_path(id:game.id) %></center>
+      </div>
+
+      <div class="thirdrow roboto-font">
+        <center><h3><%=game.name%></h3></center>
+      </div>
+
+      <div class="frow">
+        <% game.game_properties.each do |property| %>
+          <% value = property.user_game_properties.find_by_user_id(@user.id).try(:value) %>
+          <% if value.present? %>  
+            <%if property.isclosed == true %>
+              <center><%= image_tag(property.closed_values.where(value: value).first.try(:asset), class: :assets) %></center>
+            <% else %>
+              <center><h4 class='roboto-font'><%= property.name %> : <%= value %></h4></center>
+            <%end%> 
+          <%end%>
+        <%end%>
+
+        <% if @user == current_user %>
+          <ul>
+            <li class'pull-right'>
+              <%= link_to raw("<span class=\"fa fa-minus-circle\"></span>"), 
+                user_game_path(id:game.id, user_id:current_user.id),
+                class: "btn btn-danger btn-sm pull-right",
+                method: :delete %> 
+            </li>
+            <li class'pull-right'>
+              <%= link_to raw("<span class=\"fa fa-pencil\"></span>"), 
+                edit_user_game_path(id:game.id, user_id:current_user.id),
+                class: "btn btn-primary btn-sm pull-right",
+                method: :get %>
+            </li>
+          </ul>
+        <%end %>
+      </div>
+    </div>
+  </div>
+  </td>
+
+  </tr>
+
+<% end %>
+
+</table>

@@ -1,0 +1,517 @@
+$primary: #c43235;
+$secondary: #1d2120;
+
+
+
+
+
+
+.b-login{
+  background: asset_url('cover.jpg') no-repeat center center fixed;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.scroll{
+    min-height: 500px;
+    max-height: 500px;
+    overflow-y:scroll; 
+    overflow-x: hidden;
+}
+
+li {
+  list-style-type: none;
+}
+
+hr{
+  border-top: 1px solid #8c8b8b;
+}
+
+
+.assets{
+  max-width:100px;
+}
+
+.banner{
+  position: fixed;
+}
+.banner-img {
+  width: 100%;
+}
+
+.yield{
+
+  margin-top:30px;
+}
+
+.footera{
+  height:60px;
+  background-color:#333333;
+  color:#fff;
+}
+
+.footer-text{
+  margin-top:2%;
+}
+
+body,html {
+ height: 100%;
+  /* Margin bottom by footer height */
+
+}
+
+.pagination-centered{
+  text-align:center;
+}
+
+.centered{
+    float: none;
+    margin: 0 auto;
+}
+
+.pad-top {
+  padding-top: 1%;
+}
+
+.online {
+  color:#5cb85c;
+  font-weight: bold;
+}
+
+.bold{
+   font-weight: bold;
+}
+
+.offline {
+  color:#d9534f;
+  font-weight: bold;
+}
+
+.nopadding {
+   padding-left: 0 !important;
+   padding-right: 0 !important;
+}
+
+.nomargin-bot{
+   margin-bottom:0 !important;
+}
+
+.sidebar-left{
+  background:$secondary;
+}
+
+.sidebar-right{
+  background:$secondary;
+}
+
+
+.header{
+    background:$secondary;
+    color:white;
+    font-family: 'Roboto Condensed';
+    height:56px;
+    margin-bottom:3%;
+}
+
+.header-right{
+    background:$primary;
+    color:white;
+    font-family: 'Roboto Condensed';
+    height:56px;
+    margin-bottom:5%;
+}
+
+
+.headerbox{
+    background:$secondary;
+    color:white;
+    font-family: 'Roboto Condensed';
+    height:60px;
+}
+
+.roboto-font{
+  font-family: 'Roboto Condensed';
+}
+
+.container {
+    min-height:100%;
+    width:100%;
+    overflow:hidden;
+}
+
+.fill{
+    height:100%;
+    min-height:100%;
+    margin-bottom:-9999px;
+    padding-bottom:9999px;
+}
+
+.games{
+  height:100%;
+}
+
+.margin-2{
+  margin-right:2%;
+}    
+.thumbnail,textarea{
+    border-radius: 0;
+    overflow: hidden;
+  }
+
+  textarea{
+    resize:none;
+  }
+
+  .thumbnail{
+      position: relative;
+      border: 1px solid #BDC3C7;
+      
+      padding: 10px;
+      margin: 5px;
+      background-color: #EAEDF2;
+       font-weight: bold;
+  }
+
+  .frow{
+      position: relative;
+      
+  }
+
+  .frow,.secrow,.thirdrow{
+    margin: 5px 0;
+  }
+
+.secrow{
+  position: relative;
+}
+
+
+.break-all{
+  word-wrap: breal-all;
+}
+
+
+.talk-bubble {
+  word-wrap: break-word;
+  margin-left:25%;
+  display: inline-block;
+  position: relative;
+  width: 70%;
+  height: auto;
+  background-color: white;
+}
+
+.t-margin{
+  margin-top:5%;
+  margin-bottom:5%;
+}
+
+.border{
+  border: 2px solid $secondary;
+}
+.round{
+  border-radius: 30px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+
+}
+
+/* Right triangle placed top left flush. */
+.tri-right.border.left-top:before {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: -40px;
+  right: auto;
+  top: -8px;
+  bottom: auto;
+  border: 32px solid;
+  border-color: #666 transparent transparent transparent;
+}
+.tri-right.left-top:after{
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: -10px;
+  right: auto;
+  top: 0px;
+  bottom: auto;
+  border: 22px solid;
+  border-color: white transparent transparent transparent;
+}
+
+/* Right triangle, left side slightly down */
+.tri-right.border.left-in:before {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: -40px;
+  right: auto;
+  top: 30px;
+  bottom: auto;
+  border: 20px solid;
+  border-color: #666 #666 transparent transparent;
+}
+.tri-right.left-in:after{
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: -20px;
+  right: auto;
+  top: 38px;
+  bottom: auto;
+  border: 12px solid;
+  border-color: lightyellow lightyellow transparent transparent;
+}
+
+/*Right triangle, placed bottom left side slightly in*/
+.tri-right.border.btm-left:before {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: -8px;
+  right: auto;
+  top: auto;
+  bottom: -40px;
+  border: 32px solid;
+  border-color: transparent transparent transparent #666;
+}
+.tri-right.btm-left:after{
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 0px;
+  right: auto;
+  top: auto;
+  bottom: -20px;
+  border: 22px solid;
+  border-color: transparent transparent transparent lightyellow;
+}
+
+/*Right triangle, placed bottom left side slightly in*/
+.tri-right.border.btm-left-in:before {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 30px;
+  right: auto;
+  top: auto;
+  bottom: -40px;
+  border: 20px solid;
+  border-color: #666 transparent transparent #666;
+}
+.tri-right.btm-left-in:after{
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 38px;
+  right: auto;
+  top: auto;
+  bottom: -20px;
+  border: 12px solid;
+  border-color: lightyellow transparent transparent lightyellow;
+}
+
+/*Right triangle, placed bottom right side slightly in*/
+.tri-right.border.btm-right-in:before {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: auto;
+  right: 30px;
+  bottom: -40px;
+  border: 20px solid;
+  border-color: #666 #666 transparent transparent;
+}
+.tri-right.btm-right-in:after{
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: auto;
+  right: 38px;
+  bottom: -20px;
+  border: 12px solid;
+  border-color: lightyellow lightyellow transparent transparent;
+}
+/*
+  left: -8px;
+  right: auto;
+  top: auto;
+  bottom: -40px;
+  border: 32px solid;
+  border-color: transparent transparent transparent #666;
+  left: 0px;
+  right: auto;
+  top: auto;
+  bottom: -20px;
+  border: 22px solid;
+  border-color: transparent transparent transparent lightyellow;
+
+/*Right triangle, placed bottom right side slightly in*/
+.tri-right.border.btm-right:before {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: auto;
+  right: -8px;
+  bottom: -40px;
+  border: 20px solid;
+  border-color: #666 #666 transparent transparent;
+}
+.tri-right.btm-right:after{
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: auto;
+  right: 0px;
+  bottom: -20px;
+  border: 12px solid;
+  border-color: lightyellow lightyellow transparent transparent;
+}
+
+/* Right triangle, right side slightly down*/
+.tri-right.border.right-in:before {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: auto;
+  right: -40px;
+  top: 30px;
+  bottom: auto;
+  border: 20px solid;
+  border-color: #666 transparent transparent #666;
+}
+.tri-right.right-in:after{
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: auto;
+  right: -20px;
+  top: 38px;
+  bottom: auto;
+  border: 12px solid;
+  border-color: lightyellow transparent transparent lightyellow;
+}
+
+/* Right triangle placed top right flush. */
+.tri-right.border.right-top:before {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: auto;
+  right: -40px;
+  top: -8px;
+  bottom: auto;
+  border: 32px solid;
+  border-color: #666 transparent transparent transparent;
+}
+.tri-right.right-top:after{
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: auto;
+  right: -20px;
+  top: 0px;
+  bottom: auto;
+  border: 20px solid;
+  border-color: lightyellow transparent transparent transparent;
+}
+
+/* talk bubble contents */
+.talktext{
+  padding: 1em;
+  text-align: left;
+  line-height: 1.5em;
+}
+.talktext p{
+  /* remove webkit p margins */
+  -webkit-margin-before: 0em;
+  -webkit-margin-after: 0em;
+}
+
+
+.users h3 a {
+  text-decoration: none;
+  color:#000;
+}
+
+.users h3 a:hover {
+  color:#337ab7;
+}
+
+.users p a {
+  text-decoration: none;
+  color:#000;
+}
+
+.users p a:hover {
+  color:#337ab7;
+}
+
+.users ul {
+  list-style-type: none;
+}
+
+.users li img {
+  float: left;
+  margin: 0 15px 0 0;
+}
+
+.users li {
+  padding: 10px;
+  overflow: auto;
+    background: #eee;
+  margin-top:2%;
+}
+
+
+.tile {
+  min-height: 200px;
+  background:$secondary;
+  color:#fff;
+}
+
+
+.tile-2 {
+  min-height: 200px;
+  background:$primary;
+}
+
+
+.slider {
+  min-height: 200px;
+}
+
+
+.img-medium{
+  height:150px;
+  width:150px;
+}
+
+.img-small{
+  height:100px;
+  width:100px;
+}
+
+.img-thumb{
+  height:50px;
+  width:50px;
+}
+

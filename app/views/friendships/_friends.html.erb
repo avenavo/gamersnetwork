@@ -1,0 +1,34 @@
+<% if current_user.friends.last_seen.count > 0 %>
+
+<div class="col-md-12 headerbox">
+  <h4>Active friends</h4>
+</div>
+
+<table class='table'>
+<% current_user.friends.last_seen.limit(10).each do |friend| %>
+<tr>
+<td>
+
+  <div class='col-md-2 t-margin'>
+    <%=link_to image_tag(friend.asset.url(:thumb), class: 'img-circle img-thumb'), user_path(id: friend.id), method: :get %>
+  </div>
+
+  <div class='col-md-10 nopadding t-margin'>
+    <div class="talk-bubble pull-left">
+      <div class="talktext">
+      <p><b class='roboto-font'><%= link_to friend.username, user_path(id: friend.id), method: :get%></b>
+        <%= link_to raw("<span class=\"fa fa-envelope-o \"></span>"), 
+            conversations_path(id:friend.id),
+            class: "btn btn-primary btn-sm pull-right",
+            method: :post %></p>
+      </div>
+    </div>
+  </div>
+
+</td>
+</tr>
+
+<% end %>
+</table>
+
+<%end%>

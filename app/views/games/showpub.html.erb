@@ -1,0 +1,44 @@
+<% @header = 'Game details' %>
+
+<div class='col-md-2'></div>
+<div class="col-md-8">
+      <div class="media">
+        <a class="pull-left" href="#">
+        <%= image_tag(@game.asset.url(:medium)) %>
+
+      </a>
+      <div class="media-body">
+        <h3 class="media-heading"><%= @game.name %></h3>
+          <p></p>
+          <p class="text-justify"><%=@game.description%></p>
+          <ul class="list-inline list-unstyled">
+            <!-- Use Font Awesome http://fortawesome.github.io/Font-Awesome/ -->
+         <% game = @game %>
+         <% if current_user.games.where(id: game.id).present? %>
+          <li>
+          <%= link_to raw("<span class=\"fa fa-minus-circle\"></span>Remove this game from my Library"), 
+            user_game_path(id:game.id, user_id:current_user.id),
+            class: "btn btn-danger btn-block",
+            method: :delete %>
+          </li>
+          <li>
+            <%= link_to raw("<span class=\"fa fa-minus-circle\"></span>Edit properties"), 
+            edit_user_game_path(id:game.id, user_id:current_user.id),
+            class: "btn btn-primary btn-block",
+            method: :get %>
+          </li>
+         <% else %>
+          <li>
+          <%= link_to raw("<span class=\"fa fa-plus-circle\"></span>Add this game to my Library"), 
+            user_games_path(game_id:game.id, user_id:current_user.id),
+            class: "btn btn-success btn-block",
+            method: :post %>
+          </li>
+         <% end %>
+          
+
+       </ul>
+       </div>
+    </div>
+</div>
+<div class='col-md-2'></div>

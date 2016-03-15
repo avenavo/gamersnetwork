@@ -1,0 +1,15 @@
+<% publish_to @reciever_path do %>
+  $.notify("New message from <%=@author%>", "info");
+  $("#social").load(location.href + " #social>*","");
+<% end %>
+
+<% publish_to @path do %>
+  var id = "<%=@conversation.id%>";
+  var chatbox = $("#chatbox_" + id );
+  chatbox.append("<%=j render(@message) %>");
+  $("#social").load(location.href + " #social>*","");
+  $('#chat').scrollTop($('#chat')[0].scrollHeight);
+  $('.text').emoticonize({delay: 80});
+<% end %>
+$("#new_message")[0].reset();
+

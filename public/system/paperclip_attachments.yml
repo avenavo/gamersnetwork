@@ -1,0 +1,11 @@
+---
+:User:
+  :asset:
+  - :medium
+  - :small
+  - :thumb
+:Game:
+  :asset:
+  - :medium
+  - :small
+  - :thumb

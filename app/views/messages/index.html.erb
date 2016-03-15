@@ -1,0 +1,32 @@
+<% @header = 'Chat' %>
+
+<div class="col-md-10 centered">
+            <div class="panel panel-primary", style="margin-top:15%;">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-comment"></span> Chat  with <%=@reciever.username %>
+                   
+                </div>
+                <div id="chat" class="panel-body scroll">
+
+                <div id='chatbox_<%=@conversation.id%>'>
+                  <%= render @messages %>
+                </div>
+
+                </div>
+                <div class="panel-footer">
+                      <%= form_for Message.new, remote: true do |f| %>
+                      <div class="input-group">
+                      <%= hidden_field_tag :conversation_id , @conversation.id %>
+                      <%= f.text_field :content, class: 'form-control input-sm', id: 'btn-input', autocomplete: "off" %>
+                      <span class="input-group-btn">
+                      <%= submit_tag "Send", class: "btn btn-warning"  %>
+                        </span>
+                      <% end %>
+                      </span>
+                    </div>
+                </div>
+            </div>
+</div>
+
+
+

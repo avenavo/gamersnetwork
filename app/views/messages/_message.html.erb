@@ -1,0 +1,24 @@
+
+<div class="left clearfix">
+  <span class="chat-img pull-left margin-2">
+    <%= image_tag(message.user.asset.url(:thumb), class: 'img-circle img-thumb' ) %>
+  </span>
+  <div class="chat-body clearfix ">
+    <div>
+      <strong class="primary-font">
+        <%= link_to message.user.username, user_path(id: message.user.id), method: :get %> : 
+      </strong>
+      <small class="pull-right text-muted">
+        <span class="glyphicon glyphicon-time"></span>
+        <%= time_ago_in_words(message.created_at) %> ago
+      </small>
+    </div>
+    <p>  
+      <div class='margin-2'> 
+        <span id='large' class='text'><%= message.content %></span>
+      </div>
+    </p>
+   </div>
+</div>
+<hr>
+

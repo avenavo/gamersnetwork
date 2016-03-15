@@ -1,0 +1,10 @@
+<% @header = 'New Game' %>
+
+<div class="col-md-8 centered" , style="margin-top:7%;">
+  <%= form_for @game, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
+    <%= select_tag :game_id, options_from_collection_for_select(@games, :id, :name), class: "form-control" %><br />
+    <%= f.submit "Add Game", class: "btn btn-primary pull-right" %>
+  <% end %>
+</div>
+
+

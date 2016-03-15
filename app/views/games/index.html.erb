@@ -1,0 +1,69 @@
+<% @header = "Games of  #{@user.username}" %>
+
+<% if @user.games.count == 0 and @user == current_user%>
+<div class="col-md-7 centered" , style="margin-top:10%;">
+  Your library is empty || 
+  You can add games to your library <%=link_to "here(user panel)", new_user_game_path, method: :get %> or <%=link_to "here(games list)", games_path, method: :get %>
+</div>
+<%elsif @user.games.count == 0 and @user != current_user%>
+<div class="col-md-7 centered" , style="margin-top:10%;">
+  Library of <%=@user.username%> is empty 
+</div>
+<% else %>
+
+
+
+
+<% @games.each_with_index do |game,index| %>
+ <%index+=1%>
+
+  <div class="col-md-8 centered" , style="margin-top:1%;">
+    <div class="thumbnail">
+      <div class="secrow">
+        <center><%= link_to image_tag(game.banner.url, class: 'img-responsive border'), game_path(id:game.id) %></center>
+      </div>
+
+      <div class="thirdrow roboto-font">
+        <center><h3><%=game.name%></h3></center>
+      </div>
+
+      <div class="frow">
+        <% game.game_properties.each do |property| %>
+          <% value = property.user_game_properties.find_by_user_id(@user.id).try(:value) %>
+          <% if value.present? %>  
+            <%if property.isclosed == true %>
+              <center><%= image_tag(property.closed_values.where(value: value).first.try(:asset), class: :assets) %></center>
+            <% else %>
+              <center><h4 class='roboto-font'><%= property.name %> : <%= value %></h4></center>
+            <%end%> 
+          <%end%>
+        <%end%>
+
+        <% if @user == current_user %>
+          <ul>
+            <li class'pull-right'>
+              <%= link_to raw("<span class=\"fa fa-minus-circle\"></span>"), 
+                user_game_path(id:game.id, user_id:current_user.id),
+                class: "btn btn-danger btn-sm pull-right",
+                method: :delete %> 
+            </li>
+            <li class'pull-right'>
+              <%= link_to raw("<span class=\"fa fa-pencil\"></span>"), 
+                edit_user_game_path(id:game.id, user_id:current_user.id),
+                class: "btn btn-primary btn-sm pull-right",
+                method: :get %>
+            </li>
+          </ul>
+        <%end %>
+      </div>
+    </div>
+  </div>
+
+
+<% end %>
+
+
+<div class="col-md-8 centered" , style="margin-top:1%;">
+<%= will_paginate @games, renderer: BootstrapPagination::Rails %>
+</div>
+<% end %>

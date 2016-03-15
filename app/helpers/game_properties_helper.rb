@@ -1,0 +1,2 @@
+module GamePropertiesHelper
+end

@@ -1,0 +1,75 @@
+<% @header = 'Listing Users' %>
+
+
+
+  <form action="<%= users_path %>" method="get">
+  <div class="col-md-8 centered" , style="margin-top:7%;margin-bottom:5%;">
+    <%= text_field_tag :search, params[:search], placeholder: "Search Users", class: 'form-control' %>
+    <%= submit_tag "Search", class: 'btn btn-default pull-right' %>
+  </div>
+  </form>
+
+
+        
+
+<div class="users col-md-8 centered">
+  <ul>
+  <% @users.each do |user| %>
+    <% if current_user != user %>
+    <%common_games = current_user.games & user.games %>
+      <li>
+        <%= link_to image_tag(user.asset.url(:medium), class: 'img-circle img-medium border'), user, method: :get %>
+        <span class= 'roboto-font'><h3><%=link_to user.username, user, method: :get%></h3></span>
+        <p> 
+          <% if common_games.empty? %>   
+            <span class='text-muted'>no common games</span>
+          <%else%>
+          also plays
+            <%common_games.first(3).each do |game|%>
+              <%= link_to game.name, game, method: :get, class: 'bold'%> | 
+            <%end%>
+          <%end%>
+        </p>
+        <div class='pull-right'>
+        
+          <%= link_to raw("<span class=\"fa fa-envelope-o \"></span>"), 
+              conversations_path(id:user.id),
+              class: "btn btn-primary btn-sm pull-right",
+              method: :post %>
+
+           <div class='pull-right friendship_button_<%=user.id%>'>
+            <% if current_user.pending_friends.where(id: user.id).present? %>
+              <%= link_to raw("<span class=\"fa fa-minus\"></span> Delete Request "), 
+                friend_request_reject_friendship_path(id:user.id), 
+                class: "btn btn-warning btn-sm",
+                method: :delete,
+                remote: :true%>
+            <% elsif current_user.requested_friendships.where(id: user.id).present? %>  
+              <%= link_to raw("<span class=\"fa fa-plus-circle\"></span> Accept Friendship "), 
+              friend_request_accept_friendship_path(id:user.id), 
+              class: "btn btn-success btn-sm",
+              method: :post,
+              remote: :true %>
+            <% elsif current_user.friends.where(id: user.id).present? %>  
+              <%= link_to raw("<span class=\"fa fa-minus\"></span> Remove from Friends "), 
+              friend_request_reject_friendship_path(id:user.id), 
+              class: "btn btn-danger btn-sm",
+              method: :delete,
+              remote: :true %>
+            <% elsif current_user != user %>  
+              <%= link_to raw("<span class=\"fa fa-plus\"></span> Add to Friends "), 
+              friend_request_friendship_path(id:user.id), remote: :true, 
+              class: "btn btn-success btn-sm",
+              method: :post,
+              remote: :true %>
+             <% end %>
+          </div>
+
+
+        </div>
+      </li>
+    <%end%>
+  <%end%>
+  </ul>
+  <%= will_paginate @users, renderer: BootstrapPagination::Rails %>
+</div>

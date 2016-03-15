@@ -1,0 +1,31 @@
+<%if current_user.requested_friendships.count > 0 %>
+
+<div class="col-md-12 headerbox">
+  <h4>Friend requests</h4>
+</div>
+
+
+<% current_user.requested_friendships.each do |friend| %>
+
+
+  <div class='col-md-2'>
+    <%= link_to image_tag(friend.asset.url(:thumb), class: 'img-circle img-thumb' ), user_path(id: friend.id), method: :get %>
+  </div>
+
+  <div class='col-md-10 nopadding t-margin'>
+    <div class="talk-bubble tri-right left-top ">
+      <div class="talktext">
+         <p><b><%=link_to friend.username, user_path(id: friend.id), method: :get %>:</b></p>
+         <p>"Hey mate, accept my request !!"</p>
+          <p><%= link_to 'Accept', friend_request_accept_friendship_path(id:friend.id), :method => :post, remote: :true %> / 
+          <%= link_to 'Decline', friend_request_reject_friendship_path(id:friend.id), :method => :delete, remote: :true %></p>
+      </div>
+    </div>
+  </div>
+
+
+  <% end %>
+
+
+
+<%end%>

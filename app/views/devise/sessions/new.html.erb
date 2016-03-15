@@ -1,0 +1,25 @@
+
+
+
+     <% flash.each do |name, msg| %>
+       <div class="alert alert-danger alert-block nomargin-bot">
+         <button type="button" class="close" data-dismiss="alert">x</button>
+           <li><%=msg%></li>
+         </div>
+     <% end %>
+
+
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { role: 'form', class: 'login' }) do |f| %>
+  <h3 class='roboto-font'>Log in</h3>
+  <span>
+  <%= f.email_field :email, autofocus: true, placeholder: 'E-mail' %>
+  <i class='fa fa-envelope-o'></i>
+  </span>
+  <%= f.password_field :password, autocomplete: "off", placeholder: 'Password' %>
+  <i class='fa fa-key'></i>
+
+  <%= button_tag(type: 'submit') do %>
+    <i class='spinner'></i>
+    <span class="state">Log in</span>
+  <% end %>
+<% end %>

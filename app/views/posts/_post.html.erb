@@ -1,0 +1,52 @@
+ <div id='post_<%=post.id%>'>
+ <div class="row">
+        <div class="col-sm-12"></div><!-- /col-sm-12 -->
+      </div><!-- /row -->
+      <div class="row">
+        <div class="col-sm-2">
+          <div>
+            <%= image_tag(post.user.asset.url(:medium), class: 'img-circle img-medium border' ) %>
+          </div><!-- /thumbnail -->
+        </div><!-- /col-sm-2 -->
+        <div class="col-sm-9 pull-right">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <strong><%=link_to post.user.username, user_path(id: post.user.id), method: :get%></strong> <span class="text-muted">posted <%=time_ago_in_words(post.created_at) %> ago</span>
+              <div class="pull-right text-muted" id="delete">
+                <% if post.user == current_user %>
+                  <%= link_to "edit", edit_post_path(id: post.id), method: :get %> |
+                  <%= link_to "delete", post_path(id: post.id) , method: :delete  %>
+                <% end %>
+              </div>
+            </div>
+            <div class="panel-body text">
+              <%= post.post %>
+            </div><!-- /panel-body -->
+          </div><!-- /panel panel-default -->
+        </div><!-- /col-sm-5 -->
+      </div><!-- /row -->
+
+
+    <div class="row">
+      <div class="col-md-3"></div>
+      <%= render 'comments/form', :post => post.id %>
+    </div>
+
+    <br />
+
+
+<div id='comments_<%=post.id%>'>
+<%= render post.comments.last(3).reverse %>
+
+<div class="col-md-3"></div>
+   <% if post.comments.count > 3 %>
+      <a data-toggle="collapse" data-target="#comments<%=post.id%>">See more comments</a>
+    <% end %>
+
+<div id="comments<%=post.id%>" class="collapse">
+<%= render post.comments[0..-4].reverse %>
+</div>
+
+</div>
+</div>
+<hr>

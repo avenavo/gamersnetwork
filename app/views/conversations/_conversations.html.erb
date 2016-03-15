@@ -1,0 +1,48 @@
+<% if Conversation.involving(current_user.id).count > 0 %>
+
+
+<div class="col-md-12 headerbox">
+  <h4>Last conversations</h4>
+</div>
+
+<table class='table'>
+<% Conversation.involving(current_user.id).limit(5).each do |conversation| %>
+  <% if conversation.sender == current_user %>
+    <% friend = conversation.recipient %>
+  <% else %>
+    <% friend = conversation.sender %>
+  <% end %>
+
+
+  <% if conversation.messages.where(user: friend).present? %>
+    <tr>
+    <td>
+
+  <% message = conversation.messages.where(user: friend).last %>
+
+  <div class='col-md-2'>
+    <%= link_to image_tag(message.user.asset.url(:thumb), class: 'img-circle img-thumb' ), user_path(id: message.user.id), method: :get %>
+  </div>
+
+  <div class='col-md-10 nopadding t-margin'>
+    <div class="talk-bubble tri-right left-top">
+      <div class="talktext">
+        <%= link_to raw("<span class=\"fa fa-envelope-o \"></span>"), 
+            conversations_path(id:friend.id),
+            class: "btn btn-primary btn-sm pull-right",
+            method: :post %>
+        <span class='text-muted'><%= time_ago_in_words(message.created_at) %> ago</span>
+        <p><b><%=link_to message.user.username, user_path(id: message.user.id), method: :get %>:</b></p>
+        <p>"<%=truncate(message.content)%>"</p>
+      </div>
+    </div>
+  </div>
+  </td>
+  </td>
+
+  <% end %>
+
+<% end %>
+</table>
+
+<%end%>

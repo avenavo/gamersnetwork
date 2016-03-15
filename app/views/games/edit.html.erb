@@ -1,0 +1,24 @@
+<% @header = "Game properties -  #{@game.name }" %>
+
+<div class="col-md-8 centered" , style="margin-top:7%;">
+ <%= form_tag user_update_property_path(), html: { method: :put, role: "form" } do  %>
+  <% @properties.each do |property| %> 
+  <div class="form-group">
+           <br>
+    <b><%= property.name %></b>
+    <%= fields_for "properties[]", property do |pf| %>
+        <% if property.isclosed == false %>
+          <%= pf.text_field :name,
+            :value => property.user_game_properties.find_by_user_id(@user.id).try(:value), class: "form-control" %><br>
+        <% else %> || 
+          Your <%= property.name %>  is  <%= property.user_game_properties.find_by_user_id(@user.id).try(:value) %><br>
+          <%= pf.collection_select :name, @closedvalues.order('id ASC'), :value, :value, {:prompt => true, :selected => property.user_game_properties.find_by_user_id(@user.id).try(:value)}, class: "form-control"%>
+        <% end %>
+      <% end %>
+    </div>
+    <% end %>
+  <%= submit_tag "OK", class: "btn btn-primary pull-right"  %>
+<% end %>
+</div>
+
+

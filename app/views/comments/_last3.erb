@@ -1,0 +1,27 @@
+<% post.comments.last(3).reverse.each do |comment| %> 
+  <div class="col-md-3"></div>
+
+    <div class="row">
+      <div class="col-sm-1">
+        <div class="thumbnail">
+          <%= image_tag(comment.user.asset.url(:thumb), :style => 'height:100%;width:100%;', :class => "img-responsive user-photo" ) %>
+        </div><!-- /thumbnail -->
+      </div><!-- /col-sm-1 -->
+      <div class="col-sm-5">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <strong><%=link_to comment.user.username, user_path(id: comment.user.id) %></strong> <span class="text-muted">commented <%=time_ago_in_words(comment.created_at) %> ago </span>
+            <div class="pull-right text-muted" id="delete">
+              <% if comment.user == current_user %>
+                <%= link_to "delete", comment_path(id: comment.id) , method: :delete  %>
+              <% end %>
+            </div>
+          </div>
+          <div class="panel-body">
+            <%= comment.comment %>
+          </div><!-- /panel-body -->
+        </div><!-- /panel panel-default -->
+      </div><!-- /col-sm-5 -->
+    </div><!-- /row -->
+
+ <% end %>

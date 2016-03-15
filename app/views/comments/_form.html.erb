@@ -1,0 +1,26 @@
+ <div class="col-md-7">
+ <%= form_tag comments_path(), html: { method: :post, role: "form" },remote: :true do  %>
+  <% if @comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this post from being saved:</h2>
+      <ul>
+      <% @comment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= hidden_field_tag :post_id , post %>
+   <%= fields_for "comment"  do |f| %>
+  <div class="field">
+    <%= f.label 'Comments', style: 'color:white;' %><br>
+    <%= f.text_area :comment, :class => "form-control", rows: "1" %>
+    <%end%>
+  </div>
+</div>
+<div class="col-md-2">
+  <div class="actions"><br />
+      <%= submit_tag "Send", class: "btn btn-primary"  %>
+  </div>
+</div>
+<% end %>

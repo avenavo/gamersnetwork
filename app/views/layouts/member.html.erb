@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+  <title>SocialNetwork</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+
+<div id="banner">
+  <%= image_tag('header.jpg', class: 'banner-img') %>
+</div>
+
+<div class="container nopadding">
+        <div id='sidebar' class='col-md-2 nopadding sidebar-left fill'> 
+     
+
+
+          <div class='follow'>
+
+              <div id='cssmenu' class='navbar-fixed-top'>
+              <ul>
+                <li><%= link_to 'HOME' , posts_path, method: :get %></li>
+                <li><%= link_to 'Users' , users_path, method: :get %></li>
+                <li><%= link_to 'Posts' , posts_path, method: :get %></li>
+                <li><%= link_to 'Friends' , friends_path, method: :get %></li>
+                <li class='active has-sub'><a href='#'><span>Games</span></a>
+                  <ul>
+                    <li><%= link_to 'all games' , games_path, method: :get %></li>
+                    <li><%= link_to 'my games', user_games_path(user_id:current_user.id), method: :get %></li>
+                    <li><%= link_to 'add game', new_user_game_path(user_id:current_user.id), method: :get %></li>
+                 </ul>
+               </li>
+                <li class='active has-sub'><a href='#'><span>Account</span></a>
+                  <ul>
+                    <li><%= link_to 'my account', user_path(id:current_user.id), method: :get %></li>
+                    <li><%= link_to 'edit account', edit_user_registration_path, method: :get %></li>
+                    <li><%= link_to 'logout', destroy_user_session_path, method: :delete %></li>
+                 </ul>
+               </li>
+              </ul>
+              </div>
+            </div>
+        </div>
+
+        <div id="DivMain" class="col-md-8 nopadding fill"> 
+            <div class="col-md-12 header">
+              <h3><%=@header%></h3>
+            </div>
+
+
+           
+           <div class='yield'>
+              <%= flash_messages %>
+             <%=yield%>
+           </div>
+        </div>
+
+
+
+        <div class='col-md-2 nopadding sidebar-right fill'>
+          <div class="col-md-12 header-right">
+            <h3>Social box</h3>
+          </div>     
+
+    
+            <div id="social">
+           <div class="container">
+             <div class="row">
+              <%= render "friendships/friend_requests" %>
+              <%= render "conversations/conversations" %>
+              <%= render "friendships/friends" %>
+            </div>
+            </div>
+            </div>
+
+        </div>
+</div>
+
+
+</body>
+
+</html>
+
+<% Conversation.involving(current_user.id).each do |conversation| %>
+   <%= subscribe_to conversation_path(id: conversation.id)%>
+<% end %>  
+<%= subscribe_to user_path(id: current_user.id) %>

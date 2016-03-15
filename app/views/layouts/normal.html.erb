@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+  <title>SocialNetwork</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body class='b-login'>
+
+
+<div class="container nopadding">
+    
+<div id="DivMain" class="col-md-12 nopadding">  <!--    Main DIV    -->
+  <div class='wrapper'>  
+    <div class='col-md-3 centered nopadding'> 
+      <div class='col-md-6 text-left nopadding'>
+          <%= button_to 'Log in', new_user_session_path, method: :get, class: 'btn-index btn-index-primary btn-block btn-sharp' %>
+      </div>
+      <div class='col-md-6 text-right nopadding'>   
+        <%= button_to 'Register', new_user_registration_path, method: :get, class: 'btn-index btn-index-primary btn-block btn-sharp' %>
+      </div>
+
+      <div class='col-md-12 nopadding'> 
+        <%=yield%>
+      </div>
+    </div>
+  </div>
+</div>   <!--    /Main DIV    -->
+
+
+
+
+
+</div>
+
+
+
+</body>
+
+
+
+</html>
+

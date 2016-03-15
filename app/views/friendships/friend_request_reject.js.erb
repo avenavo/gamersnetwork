@@ -1,0 +1,12 @@
+<% publish_to @reciever_path do %>
+  $("#social").load(location.href + " #social>*","");
+  $("#friends").load(location.href + " #friends>*","");
+  $(".friendship_button").load(location.href+" .friendship_button>*","");
+  $(".friendship_button_<%=@author.id%>").load(location.href+" .friendship_button_<%=@author.id%>>*","");
+<% end %>
+
+
+$("#social").load(location.href + " #social>*","");
+$("#friends").load(location.href + " #friends>*","");
+$(".friendship_button_<%=@reciever.id%>").load(location.href+" .friendship_button_<%=@reciever.id%>>*","");
+$(".friendship_button").load(location.href+" .friendship_button>*","");

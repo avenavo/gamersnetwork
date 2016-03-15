@@ -1,0 +1,14 @@
+<% publish_to @reciever_path do %>
+  $.notify("New friend request from <%=@author.username%>", "info");
+  $("#social").load(location.href + " #social>*","");
+  $(".friendship_button").load(location.href+" .friendship_button>*","");
+  $(".friendship_button_<%=@author.id%>").load(location.href+" .friendship_button_<%=@author.id%>>*","");
+<% end %>
+
+
+
+$(".friendship_button_<%=@reciever.id%>").load(location.href+" .friendship_button_<%=@reciever.id%>>*","");
+$(".friendship_button").load(location.href+" .friendship_button>*","");
+
+
+

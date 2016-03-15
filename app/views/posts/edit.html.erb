@@ -1,0 +1,14 @@
+<% @header = 'Edit Post' %>
+
+  <div class="col-md-11 centered" , style="margin-top:7%;">
+
+
+ 
+    <div class="row">
+      <div class="col-md-3">
+     <%= image_tag(current_user.asset.url(:medium), class: 'img-circle')  %></div>
+      <div class="col-md-9">   <%= render 'form' %>
+      </div>
+    </div>
+
+</div>
