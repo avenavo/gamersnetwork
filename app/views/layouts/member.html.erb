@@ -7,46 +7,59 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body class='body-member'>
 
+  <header>
+      <h1>Gamers Network</h1>
+      <nav class='roboto-font bold'>
+        <%= link_to 'Posts', posts_path, method: :get%>
+        <%= link_to 'Games', games_path, method: :get%>
+        <%= link_to 'Users', users_path, method: :get%>
+        <%= link_to 'Friends', friends_path, method: :get%>
+      </nav>
+   </header>
 
-<div id="banner">
-  <%= image_tag('header.jpg', class: 'banner-img') %>
+<nav class="navbar navbar-fixed-left navbar-minimal animate" role="navigation">
+  <div class="navbar-toggler animate">
+    <span class="menu-icon"></span>
+  </div>
+  <ul class="navbar-menu animate">
+    <li>
+      <%= link_to user_path(current_user), method: :get do %>
+        <span class="desc animate"> My account </span>
+        <span class="glyphicon glyphicon-user"></span>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to edit_user_registration_path, method: :get do %>
+        <span class="desc animate"> Edit account </span>
+        <span class="fa fa-pencil"></span>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to user_games_path(current_user), method: :get do %>
+        <span class="desc animate"> My games </span>
+        <span class="fa fa-gamepad"></span>
+      <% end %>
+    </li>
+    <li>
+    <%= link_to new_user_game_path(current_user), method: :get do %>
+      <span class="desc animate"> Add game </span>
+      <span class="fa fa-plus"></span>
+    <% end %>
+    </li>
+    <li>
+      <%= link_to destroy_user_session_path, method: :delete do %>
+        <span class="desc animate"> Logout </span>
+        <span class="glyphicon glyphicon-log-out"></span>
+      <% end %>
+    </li>
+</nav>
 </div>
-
-<div class="container nopadding">
-        <div id='sidebar' class='col-md-2 nopadding sidebar-left fill'> 
-     
+<div class="container wrap nopadding bg-white">
 
 
-          <div class='follow'>
-
-              <div id='cssmenu' class='navbar-fixed-top'>
-              <ul>
-                <li><%= link_to 'HOME' , posts_path, method: :get %></li>
-                <li><%= link_to 'Users' , users_path, method: :get %></li>
-                <li><%= link_to 'Posts' , posts_path, method: :get %></li>
-                <li><%= link_to 'Friends' , friends_path, method: :get %></li>
-                <li class='active has-sub'><a href='#'><span>Games</span></a>
-                  <ul>
-                    <li><%= link_to 'all games' , games_path, method: :get %></li>
-                    <li><%= link_to 'my games', user_games_path(user_id:current_user.id), method: :get %></li>
-                    <li><%= link_to 'add game', new_user_game_path(user_id:current_user.id), method: :get %></li>
-                 </ul>
-               </li>
-                <li class='active has-sub'><a href='#'><span>Account</span></a>
-                  <ul>
-                    <li><%= link_to 'my account', user_path(id:current_user.id), method: :get %></li>
-                    <li><%= link_to 'edit account', edit_user_registration_path, method: :get %></li>
-                    <li><%= link_to 'logout', destroy_user_session_path, method: :delete %></li>
-                 </ul>
-               </li>
-              </ul>
-              </div>
-            </div>
-        </div>
-
-        <div id="DivMain" class="col-md-8 nopadding fill"> 
+        <div id="DivMain" class="col-md-9 nopadding fill  bg-white"> 
             <div class="col-md-12 header">
               <h3><%=@header%></h3>
             </div>
@@ -61,20 +74,18 @@
 
 
 
-        <div class='col-md-2 nopadding sidebar-right fill'>
+        <div class='col-md-3 nopadding sidebar-right fill'>
           <div class="col-md-12 header-right">
             <h3>Social box</h3>
           </div>     
 
     
             <div id="social">
-           <div class="container">
-             <div class="row">
+
               <%= render "friendships/friend_requests" %>
               <%= render "conversations/conversations" %>
               <%= render "friendships/friends" %>
-            </div>
-            </div>
+
             </div>
 
         </div>

@@ -1,10 +1,11 @@
+   @import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300);
 $primary: #c43235;
 $secondary: #1d2120;
 
 
+body{
 
-
-
+}
 
 .b-login{
   background: asset_url('cover.jpg') no-repeat center center fixed;
@@ -514,4 +515,5 @@ body,html {
   height:50px;
   width:50px;
 }
+
 

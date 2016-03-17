@@ -17,6 +17,7 @@
 //= require private_pub
 //= require notify
 //= require jquery.cssemoticons
+//= require animatedheader
 //= require_tree .
 
 
